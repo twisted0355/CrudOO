@@ -21,7 +21,7 @@ if(isset($_GET['idthesection'])&&ctype_digit($_GET['idthesection'])){
     // on sélectionne les étudiants de la section actuelle
     $recupStudent = $thestudentM->selectionnerStudentBySectionId($idsection);
 
-    echo $twig->render("sectionPublic.html.twig",["lemenu" => $menu,"detailsection"=>$detailsection,"student"=>$recupStudent]);
+    echo $twig->render("public/sectionPublic.html.twig",["lemenu" => $menu,"detailsection"=>$detailsection,"student"=>$recupStudent]);
 
 
 /*
@@ -34,7 +34,7 @@ if(isset($_GET['idthesection'])&&ctype_digit($_GET['idthesection'])){
     if(empty($_POST)){
 
         // on appel le formulaire
-        echo $twig->render("connectPublic.html.twig",["lemenu" => $menu]);
+        echo $twig->render("public/connectPublic.html.twig",["lemenu" => $menu]);
 
     }else{
         // instanciation de l'objet theuser avec hydratation des variables de notre formulaire (indispensable pour l'encodage en sha256 du mot de passe et bonne pratique)
@@ -49,7 +49,7 @@ if(isset($_GET['idthesection'])&&ctype_digit($_GET['idthesection'])){
             header("Location: ./");
         }else{
             // retour à notre formulaire de connexion avec affichage d'une erreur
-            echo $twig->render("connectPublic.html.twig",["lemenu" => $menu, "erreur"=>"Login ou mot de passe incorrect"]);
+            echo $twig->render("public/connectPublic.html.twig",["lemenu" => $menu, "erreur"=>"Login ou mot de passe incorrect"]);
         }
 
     }
@@ -68,6 +68,6 @@ if(isset($_GET['idthesection'])&&ctype_digit($_GET['idthesection'])){
 
 // on appelle la vue générée par twig
 
-    echo $twig->render('accueilPublic.html.twig', ["lemenu" => $menu, "sections" => $section]);
+    echo $twig->render('public/accueilPublic.html.twig', ["lemenu" => $menu, "sections" => $section]);
 
 }

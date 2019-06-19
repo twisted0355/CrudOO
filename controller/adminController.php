@@ -31,7 +31,7 @@ if (isset($_GET['disconnect'])) {
     // on utilise le manager pour supprimer la section
     $fordelete = $thesectionM->deleteSection($deleteId);
 
-    //header("Location: ./");
+    header("Location: ./");
 
 
 
@@ -63,7 +63,7 @@ if (isset($_GET['disconnect'])) {
     if(empty($_POST)){
 
         // appel de la vue
-        echo $twig->render("updateSectionAdmin.html.twig",["contenu"=>$recupSection]);
+        echo $twig->render("admin/updateSectionAdmin.html.twig",["contenu"=>$recupSection]);
 
     }else{
 
@@ -78,7 +78,7 @@ if (isset($_GET['disconnect'])) {
         if($forupdate){
             header("Location: ./");
         }else{
-            echo $twig->render("updateSectionAdmin.html.twig",["contenu"=>$recupSection]);
+            echo $twig->render("admin/updateSectionAdmin.html.twig",["contenu"=>$recupSection]);
         }
 
     }
@@ -99,7 +99,7 @@ if (isset($_GET['disconnect'])) {
 
 
         // appel de la vue
-        echo $twig->render("ajoutSectionAdmin.html.twig");
+        echo $twig->render("admin/ajoutSectionAdmin.html.twig");
 
     }else{
 
@@ -116,7 +116,7 @@ if (isset($_GET['disconnect'])) {
         }else{
 
             // appel de la vue avec affichage d'une erreur
-            echo $twig->render("ajoutSectionAdmin.html.twig",["error"=>"Erreur lors de l'insertion, veuillez recommencer"]);
+            echo $twig->render("admin/ajoutSectionAdmin.html.twig",["error"=>"Erreur lors de l'insertion, veuillez recommencer"]);
 
         }
 
@@ -136,6 +136,6 @@ if (isset($_GET['disconnect'])) {
 
     // on va chercher les sections et leurs étudiants (si il y en a)
     $recup = $thesectionM->selectionnerSectionIndexAdmin();
-    echo $twig->render('accueilAdmin.html.twig', ["section"=>$recup]);
+    echo $twig->render('admin/accueilAdmin.html.twig', ["section"=>$recup]);
 
 }

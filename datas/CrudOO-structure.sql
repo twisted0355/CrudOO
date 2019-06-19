@@ -74,3 +74,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- update cascade
+ALTER TABLE `CrudOO`.`thesection_has_thestudent` DROP FOREIGN KEY `fk_thesection_has_thestudent_thesection`; ALTER TABLE `CrudOO`.`thesection_has_thestudent` ADD CONSTRAINT `fk_thesection_has_thestudent_thesection` FOREIGN KEY (`thesection_idthesection`) REFERENCES `CrudOO`.`thesection`(`idthesection`) ON DELETE CASCADE ON UPDATE NO ACTION; ALTER TABLE `CrudOO`.`thesection_has_thestudent` DROP FOREIGN KEY `fk_thesection_has_thestudent_thestudent1`; ALTER TABLE `CrudOO`.`thesection_has_thestudent` ADD CONSTRAINT `fk_thesection_has_thestudent_thestudent1` FOREIGN KEY (`thestudent_idthestudent`) REFERENCES `CrudOO`.`thestudent`(`idthestudent`) ON DELETE CASCADE ON UPDATE NO ACTION;
