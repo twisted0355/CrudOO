@@ -14,3 +14,19 @@ In your console, use composer to install the dependencies:
     composer install
     
     
+In PhpMyAdmin, import the structure of your database (disable foreign key verification!):
+
+    datas/CrudOO-structure.sql
+    
+In PhpMyAdmin, select the "crudoo" db and then import the data:
+
+    datas/CrudOO-datas.sql
+    
+#### Next step:
+To login to the admin:
+
+    votre login : lulu
+    votre pwd : lulu
+    
+### Exercice    
+    
