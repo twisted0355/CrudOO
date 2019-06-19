@@ -6,6 +6,9 @@
  */
 
 
+
+
+
 if (isset($_GET['disconnect'])) {
 
     /*
@@ -16,6 +19,17 @@ if (isset($_GET['disconnect'])) {
 
     $theuserM->deconnecterSession();
 
+    // on veut gérer les étudiants
+}elseif(isset($_GET['adminstudent'])){
+
+    /*
+     *
+     * Appel du contrôleur gérant les étudiants
+     *
+     * !!!!! la variable get adminstudent doit toujours rester dans l'url tant que l'on veut gérer les étudients
+     *
+     */
+    require_once "studentController.php";
 
 }elseif (isset($_GET['delete'])&&ctype_digit($_GET['delete'])&&!empty($_GET['delete'])){
 
