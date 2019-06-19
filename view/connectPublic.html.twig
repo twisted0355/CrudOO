@@ -1,0 +1,34 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template1.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}{{ parent() }} | Connexion{% endblock %}
+
+{% block menuhaut %}
+{% include "menuhautpublic.html.twig" %}
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Connexion</h1>
+                <p class="lead">Veuillez vous connecter pour accéder à l'administration</p>
+            </div>
+            <div class="col-lg-6 text-left">
+                <form action="" method="post" name="connect">
+                    <input type="text" name="thelogin" placeholder="votre login" required><br>
+                    <input type="password" name="thepwd" placeholder="votre pwd" required><br>
+                    <input type="submit" value="Envoyer" required><br>
+                </form>
+                <h3>{{ erreur }}</h3>
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}

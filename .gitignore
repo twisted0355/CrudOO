@@ -1,0 +1,4 @@
+# on ne met jamais les bibliothèques externes sur github, le fichier composer.json suffit pour qu'un autre utilisateur réinstalle les dépendances
+/vendor/
+# PHPStorm
+/.idea/
