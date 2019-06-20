@@ -29,4 +29,33 @@ To login to the admin:
     votre pwd : lulu
     
 ### Exercice    
+Après la création de studentController.php, qui sera appelé depuis adminContoller.php lorsqu'on est connecté **ET** qu'il existe la **variable GET adminstudent**, il vous faut créer:
+##### Page d'accueil gérant les stagiaires
+Créez la page d'accueil en Twig dans un sous dossier de
+
+    view/admin/student/
+
+Ensuite dans le modèle 
+
+    thestudentManager.php
+Créez une méthode publique qui va récupérer tous les stagiaires avec les sections dans lesquelles ils sont, sélectionnez les stagiaires qui n'ont pas de section également! (jointure externe)
+
+ Récupérez cette méthode dans studentController.php et passez la en paramètre twig (format tableau) pour afficher la vue.
+ 
+ La vue de la page d'accueil doit afficher un lien vers ajouter un stagiaire:
+ 
+    <a href="?adminstudent&addstudent">Ajouter un stagiaire</a>
+ Ensuite affichez chaque stagiaire avec les sections dans lesquelles ils sont (si ils en ont) et ajouter les liens modifier et supprimer à côté de chaque nom:
+ 
+    <a href="?adminstudent&update={{ item.idthestudent }}">modifier</a> 
+    | 
+    <a href="?adminstudent&delete={{ item.idthestudent }}">supprimer</a>  
     
+ ##### Page d'ajout d'un stagiaire
+ Créez la page affichant le formulaire en Twig dans un sous dossier de
+ 
+     view/admin/student/
+     
+ Affichez cette vue depuis studentController.php **si le formulaire n'est pas envoyé** en twig pour afficher la vue.  
+  
+ Créez ensuite une méthode publique dans studentController.php qui va insérer un nouveau stagiaire dans la base de donnée en utilisant un objet (une instance) de type "student"!           
