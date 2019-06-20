@@ -59,4 +59,25 @@ class thestudentManager
 
 
     }
+
+    // Function ajouter un étudiant et la sections dans la base de données
+    public function ajouterStudent()
+    {
+        //j'insère le nom et le prénom de l'élève dans la base de donnée du nouvelles élève dans la database
+        $sql = 'INSERT INTO thestudent(thename, thesurname),
+                VALUE(:thename, :theusername)';
+        $req->execute(array(
+            'thename' => $_POST['thename'],
+            'thesurname' => $_POST['surname']
+        ));
+
+        //Je récupère l'id de l'atudiant ajouté
+        $sql = 'SELECT theidstudent, thename, thesurname FROM thestudent WHERE thesurname';
+
+
+        // J'inscère l'ID de l'étudiant dans la section choisi
+
+    }
+
+
 }

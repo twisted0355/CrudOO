@@ -16,18 +16,20 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Gestion des étudiants</p>
             </div>
-            <div class="col-lg-6 text-left">
-                <a href="?adminstudent&addstudent">Ajouter un stagiaire</a>
+            <div class="col-lg-12 text-left" style="padding-top:5%; margin-top:8%; border-top:1px solid rgba(0,0,0,0.3);">
+                <a href="?adminstudent&addstudent" style="padding:15px; background-color:#2C81FF; color:#ffffff;">
+                    Ajouter un stagiaire
+                </a>
                 {# Faites apparaître tous les stagiaires avec les sections quand ils en ont, avec un lien modifier, et un lien supprimer #}
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="margin-left:-15px; margin-top:50px;">
                 <br>
                     <table>
                         <tr>
-                            <td style="border:solid 1px black; padding:10px;">Nom</td>
-                            <td style="border:solid 1px black; padding:10px;">Prenom</td>
-                            <td style="border:solid 1px black; padding:10px;">Section</td>
-                            <td style="border:solid 1px black; padding:10px;"></td>
-                            <td style="border:solid 1px black; padding:10px;"></td>
+                            <td style="border:solid 1px black; padding:10px; font-weight:bold;">Nom</td>
+                            <td style="border:solid 1px black; padding:10px; font-weight:bold;">Prenom</td>
+                            <td style="border:solid 1px black; padding:10px; font-weight:bold;">Section</td>
+                            <td style="border:solid 1px black; padding:10px; font-weight:bold;"></td>
+                            <td style="border:solid 1px black; padding:10px; font-weight:bold;"></td>
                         </tr>
                         {% for item in student%}
                             <tr style="border:solid 1px black;">
@@ -58,9 +60,7 @@
             </div>
         </div>
 </main>
-
 {% endblock %}
-
 {% block bas %}
 {% include "footer.html.twig" %}
 {% endblock %}
