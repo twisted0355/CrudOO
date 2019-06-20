@@ -22,6 +22,6 @@ if(isset($_GET['addstagiaire'])){
 
 // récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
 
-    echo $twig->render("admin/student/accueilAdminStudent.html.twig");
+    echo $twig->render("admin/student/accueilAdminStudent  .html.twig");
 
 }
