@@ -19,6 +19,41 @@
             <div class="col-lg-6 text-left">
                 <a href="?adminstudent&addstudent">Ajouter un stagiaire</a>
                 {# Faites apparaître tous les stagiaires avec les sections quand ils en ont, avec un lien modifier, et un lien supprimer #}
+                <div class="col-lg-12">
+                <br>
+                    <table>
+                        <tr>
+                            <td style="border:solid 1px black; padding:10px;">Nom</td>
+                            <td style="border:solid 1px black; padding:10px;">Prenom</td>
+                            <td style="border:solid 1px black; padding:10px;">Section</td>
+                            <td style="border:solid 1px black; padding:10px;"></td>
+                            <td style="border:solid 1px black; padding:10px;"></td>
+                        </tr>
+                        {% for item in student%}
+                            <tr style="border:solid 1px black;">
+                                <td style="border:solid 1px black; padding:10px;">
+                                    {{item.thename}}
+                                </td>
+                                <td style="border:solid 1px black; padding:10px;">
+                                    {{item.thesurname}}
+                                </td>
+                                <td style="border:solid 1px black; padding:10px;">
+                                    {{item.thetitle}}
+                                </td>
+                                <td style="border:solid 1px black; padding:10px;">
+                                    <a href="#">
+                                        Modifier
+                                    </a>
+                                </td>
+                                <td style="border:solid 1px black; padding:10px;">
+                                    <a href="#">
+                                        Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
 
             </div>
         </div>

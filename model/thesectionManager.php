@@ -87,7 +87,7 @@ class thesectionManager
 			ON a.idthesection = b.thesection_idthesection
 		LEFT JOIN thestudent c
 			ON b.thestudent_idthestudent = c.idthestudent
-    GROUP BY a.idthesection        
+    GROUP BY a.idthesection
     ;";
         $recup = $this->db->query($sql);
 

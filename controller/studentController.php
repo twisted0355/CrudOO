@@ -7,21 +7,20 @@
  *
  *
  */
+    if(isset($_GET['addstagiaire'])){
+        /*
+         * on veut ajouter un stagiaire
+         */
 
+    }else {
 
-if(isset($_GET['addstagiaire'])){
-    /*
-     * on veut ajouter un stagiaire
-     */
+        /*
+         * Page d'accueil
+         */
 
-}else {
+    // récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
 
-    /*
-     * Page d'accueil
-     */
+        $student = $thestudentM->afficherStudent();
+        echo $twig->render("admin/student/accueilAdminStudent.html.twig",array('student'=>$student));
 
-// récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
-
-    echo $twig->render("admin/student/accueilAdminStudent.html.twig");
-
-}
+    }

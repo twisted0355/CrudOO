@@ -14,23 +14,49 @@ class thestudentManager
     }
 
     // on sélectionne les étudiants de la section actuelle grâce à son id
-    public function selectionnerStudentBySectionId(int $idsection): array {
+    public function selectionnerStudentBySectionId(int $idsection): array
+    {
 
-        if($idsection===0) return [];
+        if ($idsection === 0) {
+            return [];
+        }
 
-        $sql="SELECT thestudent.*
+        $sql = "SELECT thestudent.*
 	FROM thestudent
     INNER JOIN thesection_has_thestudent
 		ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
     WHERE  thesection_has_thestudent.thesection_idthesection=?;";
 
         $recup = $this->db->prepare($sql);
-        $recup->bindValue(1,$idsection,PDO::PARAM_INT);
+        $recup->bindValue(1, $idsection, PDO::PARAM_INT);
         $recup->execute();
 
-        if($recup->rowCount() ===0) return [];
+        if ($recup->rowCount() === 0) {
+            return [];
+        }
 
         return $recup->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+
+    // function afficher étudiants et leurs sections
+    public function afficherStudent()
+    {
+        $sql = 'SELECT thename, thesurname, thetitle
+        FROM thestudent
+        LEFT JOIN thesection_has_thestudent
+        ON thesection_has_thestudent.thestudent_idthestudent = thestudent.idthestudent
+        LEFT JOIN thesection
+        ON thesection_has_thestudent.thesection_idthesection = thesection.idthesection';
+
+        $recup = $this->db->query($sql);
+        if ($recup->rowCount() === 0) {
+            return [];
+        }
+        return $recup->fetchAll(PDO::FETCH_ASSOC);
+
+
 
     }
 }
