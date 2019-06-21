@@ -26,10 +26,13 @@ require_once 'vendor/autoload.php';
 
 // Initialize twig templating system
 $loader = new \Twig\Loader\FilesystemLoader('view/');
-$twig = new \Twig\Environment($loader);
+$twig = new \Twig\Environment($loader,[
+    'debug' => true,
+    ]);
 // twig extension for text
 $twig->addExtension(new Twig_Extensions_Extension_Text());
-
+// twig extension for debug
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
 
 /*
