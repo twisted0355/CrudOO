@@ -9,7 +9,7 @@
  */
 
 
-if(isset($_GET['addstagiaire'])){
+if(isset($_GET['addstudent'])){
     /*
      * on veut ajouter un stagiaire
      */
@@ -21,7 +21,11 @@ if(isset($_GET['addstagiaire'])){
      */
 
 // récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
+    $recupStudents = $thestudentM->selectionnerAllStudent();
+    
+    var_dump($recupStudents);
 
+    // appel de la vue
     echo $twig->render("admin/student/accueilAdminStudent.html.twig");
 
 }
