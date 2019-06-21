@@ -5,12 +5,12 @@
 {% block title %}{{ parent() }} | Accueil de l'admin des étudiants{% endblock %}
 
 {% block menuhaut %}
-{% include "admin/menuHautAdmin.html.twig" %}
+    {% include "admin/menuHautAdmin.html.twig" %}
 {% endblock %}
 
 {% block milieu %}
     <!-- Page Content -->
-<main role="main" class="container">
+    <main role="main" class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="mt-5">Administration du CF2m</h1>
@@ -19,13 +19,23 @@
             <div class="col-lg-6 text-left">
                 <a href="?adminstudent&addstudent">Ajouter un stagiaire</a>
                 {# Faites apparaître tous les stagiaires avec les sections quand ils en ont, avec un lien modifier, et un lien supprimer #}
-{{ dump(user) }}
+                {# dump(student) #}
+                {% for item in student %}
+                    <h4>{{ item.thename }} {{ item.thesurname }}</h4>
+                    {% if item.thetitle is empty %}
+                        <p>Cet élève n'est pas dans une section</p>
+                    {% else %}    
+                        <p>{{ item.thetitle }}</p>
+                    {% endif %}
+                {% else %}
+                    <h4 class='mt-3'>Pas encore d'étudiants</h4>
+                {% endfor %}
             </div>
         </div>
-</main>
+    </main>
 
 {% endblock %}
 
 {% block bas %}
-{% include "footer.html.twig" %}
+    {% include "footer.html.twig" %}
 {% endblock %}

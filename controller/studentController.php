@@ -24,7 +24,7 @@ if(isset($_GET['addstudent'])){
     $recupStudents = $thestudentM->selectionnerAllStudent();
     
 
-    // appel de la vue
-    echo $twig->render("admin/student/accueilAdminStudent.html.twig");
+    // appel de la vue avec le passage des étudiants
+    echo $twig->render("admin/student/accueilAdminStudent.html.twig",["student"=>$recupStudents]);
 
 }
