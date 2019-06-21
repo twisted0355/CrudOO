@@ -13,7 +13,12 @@ if(isset($_GET['addstudent'])){
     /*
      * on veut ajouter un stagiaire
      */
-
+    
+    // on utilise la méthode qui prend titre et id de toutes les sections
+    $recupSections = $thesectionM->creerMenu();
+    
+    // appel de la vue avec le passage des sections
+    echo $twig->render("admin/student/ajoutAdminStudent.html.twig",["sections"=>$recupSections]);
     
 }elseif(isset($_GET['update'])&& ctype_digit($_GET['update'])){
     $idstagiaire= (int) $_GET['update'];
