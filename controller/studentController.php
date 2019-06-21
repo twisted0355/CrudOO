@@ -14,6 +14,19 @@ if(isset($_GET['addstudent'])){
      * on veut ajouter un stagiaire
      */
 
+    
+}elseif(isset($_GET['update'])&& ctype_digit($_GET['update'])){
+    $idstagiaire= (int) $_GET['update'];
+    /*
+     * on veut modifier un stagiaire
+     */
+
+}elseif(isset($_GET['delete'])&& ctype_digit($_GET['delete'])){
+    /*
+     * on veut supprimer un stagiaire
+     */
+    $idstagiaire= (int) $_GET['delete'];
+    
 }else {
 
     /*
