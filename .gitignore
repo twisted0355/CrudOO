@@ -2,3 +2,6 @@
 /vendor/
 # PHPStorm
 /.idea/
+# NetBeans
+/nbproject/
+

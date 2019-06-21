@@ -33,4 +33,21 @@ class thestudentManager
         return $recup->fetchAll(PDO::FETCH_ASSOC);
 
     }
+
+    // récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
+    public function selectionnerAllStudent():array {
+
+        $sql="SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR '|||') AS thetitle
+              FROM thestudent
+                    LEFT JOIN thesection_has_thestudent
+                        ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
+                    LEFT JOIN thesection
+                        ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection
+                GROUP BY thestudent.idthestudent;
+        ";
+        
+
+    }
+
+
 }
