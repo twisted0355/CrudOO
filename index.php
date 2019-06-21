@@ -1,4 +1,5 @@
 <?php
+
 /*
  *
  *
@@ -24,11 +25,11 @@ require_once 'vendor/autoload.php';
 
 
 
-// Initialize twig templating system
+// Initialize twig templating system - !(PRODUCT) => mod dev
 $loader = new \Twig\Loader\FilesystemLoader('view/');
-$twig = new \Twig\Environment($loader,[
-    'debug' => true,
-    ]);
+$twig = new \Twig\Environment($loader, [
+    'debug' => !(PRODUCT),
+        ]);
 // twig extension for text
 $twig->addExtension(new Twig_Extensions_Extension_Text());
 // twig extension for debug
@@ -47,11 +48,11 @@ spl_autoload_register(function ($class) {
 // connexion to our DB
 try {
     $connexion = new MyPDO(
-        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';port=' . DB_PORT . ';charset=' . DB_CHARSET,
-        DB_LOGIN,
-        DB_PWD,
-        null,
-        PRODUCT);
+            'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';port=' . DB_PORT . ';charset=' . DB_CHARSET,
+            DB_LOGIN,
+            DB_PWD,
+            null,
+            PRODUCT);
 } catch (PDOException $e) {
     echo $e->getMessage();
     die();
@@ -66,19 +67,17 @@ $theuserM = new theuserManager($connexion);
 
 // we're connected
 
-if(isset($_SESSION['myKey'])&&$_SESSION['myKey']==session_id()){
+if (isset($_SESSION['myKey']) && $_SESSION['myKey'] == session_id()) {
 
     /*
      * admin
      */
     require_once "controller/adminController.php";
-
-}else {
+} else {
 
     /*
      * public
      */
 
     require_once "controller/publicController.php";
-
 }
