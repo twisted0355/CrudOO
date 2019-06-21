@@ -17,11 +17,11 @@
                 <p class="lead">Gestion des étudiants</p>
             </div>
             <div class="col-lg-6 text-left">
-                <a href="?adminstudent&addstudent">Ajouter un stagiaire</a>
+                <h5 class='mb-4'><a href="?adminstudent&addstudent">Ajouter un stagiaire</a></h5>
                 {# Faites apparaître tous les stagiaires avec les sections quand ils en ont, avec un lien modifier, et un lien supprimer #}
                 {# dump(student) #}
                 {% for item in student %}
-                    <h4>{{ item.thename }} {{ item.thesurname }}</h4>
+                    <h4>{{ item.thename }} {{ item.thesurname }}<small> <a href='?adminstudent&update={{ item.idthestudent }}'>Mettre à jour</a> | <a href='?adminstudent&delete={{ item.idthestudent }}'>Supprimer</a> </small></h4>
                     {% if item.thetitle is empty %}
                         <p>Cet élève n'est pas dans une section</p>
                     {% else %}    
