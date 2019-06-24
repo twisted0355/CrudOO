@@ -59,7 +59,24 @@ class thestudentManager
     
     public function insertStudentWithSection(thestudent $datas, array $linkWithSection = []): bool{
         
-        return true;
+        // préparation de la requête d'ajout de thestudent
+        $sql = "INSERT INTO thestudent (thename,thesurname) VALUES (?,?);";
+        $reqStudent = $this->db->prepare($sql);
+        
+        $reqStudent->bindValue(1, $datas->getThename(),PDO::PARAM_STR);
+        $reqStudent->bindValue(2, $datas->getThesurname(),PDO::PARAM_STR);
+        
+        // on essaie l'insertion de l'étudiant
+        try{
+            $reqStudent->execute();
+        } catch (PDOException $ex) {
+            // sinon affichage d'une erreur
+            echo $ex->getMessage();
+            // et arrêt de la méthode + retour false
+            return false;
+        }
+        
+        
         
     }
 
