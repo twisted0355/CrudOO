@@ -54,6 +54,14 @@ class thestudentManager
 
 
     }
+    
+    // on va insérer un nouvel étudiant dans la table thestudent grâce à une instance de type thestudent, et on va insérer dans la table de jointure thesection_has_thestudent le lien entre les 2 tables SI il y a un lien
+    
+    public function insertStudentWithSection(thestudent $datas, array $linkWithSection = []): bool{
+        
+        return true;
+        
+    }
 
 
 }

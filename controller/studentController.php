@@ -31,7 +31,19 @@ if (isset($_GET['addstudent'])) {
         // on va instancier la classe thestudent pour hydrater thename et thesurname
         $student = new thestudent($_POST);
         
-        var_dump($student);
+        // si on a au moins une section
+        if(isset($_POST['idthesection'])){
+           
+            // insertion de l'étudiant et des sections 
+            $insert = $thestudentM->insertStudentWithSection($student,$_POST['idthesection']);
+            
+        // on a pas de sections    
+        }else{
+            // insertion de l'étudiant
+            $insert = $thestudentM->insertStudentWithSection($student);
+        }
+        
+        
         
     }
     
