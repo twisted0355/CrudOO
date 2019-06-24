@@ -45,6 +45,7 @@ try {
     $connexion->exec("INSERT INTO pdo1 (nom,texte) VALUES ('hhh','g g g g')");
 
     $connexion->commit();
+    
 }catch (PDOException $e){
     $connexion->rollBack();
     $erreur = $e->getMessage();
