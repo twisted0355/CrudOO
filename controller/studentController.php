@@ -43,7 +43,11 @@ if (isset($_GET['addstudent'])) {
             $insert = $thestudentM->insertStudentWithSection($student);
         }
         
-        
+        if($insert){
+            header("Location: ./?adminstudent");
+        }else{
+            header("Location: ./?adminstudent&addstudent");
+        }
         
     }
     

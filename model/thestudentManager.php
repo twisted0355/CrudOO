@@ -76,6 +76,36 @@ class thestudentManager
             return false;
         }
         
+        // si on est ici, l'insertion a fonctionné
+        
+        // si on a pas de section à joindre, on arrête ici
+        if(empty($linkWithSection)) return true;
+        
+        // on récupère l'id de l'utilisateur qu'on vient d'insérer
+        $idstudent = $this->db->lastInsertId(); 
+        
+        // préparation de la requête pour thesection_has_thestudent
+        
+        $sql = "INSERT INTO thesection_has_thestudent (thestudent_idthestudent,thesection_idthesection) VALUES ";
+        
+        // boucle sur le tableau $linkWithSection
+        foreach($linkWithSection as $value){
+            $value = (int) $value;
+            if(!empty($value)) $sql .= "($idstudent,$value)," ;
+        }
+        
+        // on retire la virgule de fin
+        $sql = substr($sql, 0,-1);
+        
+        // exécution de l'insertion
+        try{
+            $this->db->exec($sql);
+            return true;
+            
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            return false;
+        }
         
         
     }
