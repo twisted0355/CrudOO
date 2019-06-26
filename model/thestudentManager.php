@@ -127,11 +127,6 @@ class thestudentManager {
             $reqStudent->bindValue(1, $datas->getThename(), PDO::PARAM_STR);
             $reqStudent->bindValue(2, $datas->getThesurname(), PDO::PARAM_STR);
 
-            if(empty($datas->getThename())||empty($datas->getThesurname())){
-                
-                return false;
-                
-            }
             // on insert de l'étudiant
             $reqStudent->execute(); // il y aurait un commit ici sans le mode transaction, pour le moment, ça reste en mémoir en attendant le commit
             
