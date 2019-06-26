@@ -43,12 +43,13 @@ class thestudentManager
     // function afficher étudiants et leurs sections
     public function afficherStudent()
     {
-        $sql = 'SELECT thename, thesurname, thetitle
+        $sql = "SELECT thename, thesurname, thetitle,GROUP_CONCAT(thetitle SEPARATOR ' / ') AS thetitle
         FROM thestudent
         LEFT JOIN thesection_has_thestudent
         ON thesection_has_thestudent.thestudent_idthestudent = thestudent.idthestudent
         LEFT JOIN thesection
-        ON thesection_has_thestudent.thesection_idthesection = thesection.idthesection';
+        ON thesection_has_thestudent.thesection_idthesection = thesection.idthesection
+        GROUP BY thestudent.idthestudent";
 
         $recup = $this->db->query($sql);
         if ($recup->rowCount() === 0) {
@@ -64,18 +65,23 @@ class thestudentManager
     public function ajouterStudent()
     {
         //j'insère le nom et le prénom de l'élève dans la base de donnée du nouvelles élève dans la database
-        $sql = 'INSERT INTO thestudent(thename, thesurname),
-                VALUE(:thename, :theusername)';
-        $req->execute(array(
+        $sql = "INSERT INTO thestudent(thename, thesurname),
+                VALUE(:thename, :theusername)";
+        $sql->execute(array(
             'thename' => $_POST['thename'],
             'thesurname' => $_POST['surname']
         ));
 
         //Je récupère l'id de l'atudiant ajouté
-        $sql = 'SELECT theidstudent, thename, thesurname FROM thestudent WHERE thesurname';
-
+        $idstudent = "SELECT theidstudent FROM thestudent WHERE thesurname";
 
         // J'inscère l'ID de l'étudiant dans la section choisi
+        $sql = "INSERT INTO thesection_has_thestudent(thesection_idthesection, thestudent_idthestudent),
+                VALUE(:section, :idstudent)";
+        $sql->execute(array(
+            'section'=>$_POST['section'],
+            'idstudent'=> $idstudent
+        ));
 
     }
 

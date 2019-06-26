@@ -7,12 +7,18 @@
  *
  *
  */
-    if(isset($_GET['addstagiaire'])){
-        /*
-         * on veut ajouter un stagiaire
-         */
+    if(isset($_GET['addstudent'])){
 
-    }else {
+        $student = $thestudentM->afficherStudent();
+
+            // Ajouter un stagiaire
+            $count = $_GET['count'];
+            echo $twig->render("admin/student/ajoutStudent.html.twig",array('student'=>$student, 'count'=> $count));
+    }
+    elseif(isset($_GET['update']) && ctype_digit($_GET['update'])){
+        //modifier stagiaire
+    }
+    else{
 
         /*
          * Page d'accueil
