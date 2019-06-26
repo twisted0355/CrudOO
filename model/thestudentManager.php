@@ -103,7 +103,7 @@ class thestudentManager {
             $this->db->exec($sql);
             return true;
         } catch (PDOException $ex) {
-            echo $ex->getMessage();
+            echo $ex->getMessage();  
             return false;
         }
     }
