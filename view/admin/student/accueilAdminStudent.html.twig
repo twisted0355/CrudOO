@@ -16,58 +16,6 @@
                 <h1 class="mt-5">Administration du CF2m</h1>
                 <p class="lead">Gestion des étudiants</p>
             </div>
-<<<<<<< HEAD
-            <div class="col-lg-12 text-left" style="padding-top:5%; margin-top:8%; border-top:1px solid rgba(0,0,0,0.3);">
-                <a href="?adminstudent&addstudent&count=1" style="padding:15px; background-color:rgba(44,129,255,1); color:#ffffff;">
-                    Ajouter un stagiaire
-                </a>
-                {# Faites apparaître tous les stagiaires avec les sections quand ils en ont, avec un lien modifier, et un lien supprimer #}
-                <div class="col-lg-12" style="margin-left:-15px; margin-top:50px;">
-                <br>
-                    <table class="col-lg-12">
-                        <tr style="text-align:center;">
-                            <td style="border:solid 1px black; padding:10px; font-weight:bold;">Nom</td>
-                            <td style="border:solid 1px black; padding:10px; font-weight:bold;">Prenom</td>
-                            <td style="border:solid 1px black; padding:10px; font-weight:bold;">Section</td>
-                            <td style="border-top:solid 1px black; padding:10px; font-weight:bold;"></td>
-                            <td style="border-top:solid 1px black; padding:10px; font-weight:bold;"></td>
-                            <td style="border-top:solid 1px black; border-right:solid 1px black; padding:10px; font-weight:bold;"></td>
-                        </tr>
-                        {% for item in student%}
-                            <tr style="border:solid 1px black; text-align:center;">
-                                <td style="border:solid 1px black; padding:10px;">
-                                    {{item.thename}}
-                                </td>
-                                <td style="border:solid 1px black; padding:10px;">
-                                    {{item.thesurname}}
-                                </td>
-                                <td style="border:solid 1px black; padding:10px;">
-                                    {{item.thetitle}}
-                                </td>
-                                <td style="border:solid 1px black; padding:10px; font-size:12px;">
-                                    <a href="#">
-                                        Afficher
-                                    </a>
-                                </td>
-                                <td style="border:solid 1px black; padding:10px;font-size:12px;">
-                                    <a href="?addstagiaire">
-                                        Modifier
-                                    </a>
-                                </td>
-                                <td style="border:solid 1px black; padding:10px;font-size:12px;">
-                                    <a href="#">
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-
-            </div>
-        </div>
-</main>
-=======
             <div class="col-lg-6 text-left">
                 <h5 class='mb-4'><a href="?adminstudent&addstudent">Ajouter un stagiaire</a></h5>
                 {# Faites apparaître tous les stagiaires avec les sections quand ils en ont, avec un lien modifier, et un lien supprimer #}
@@ -86,7 +34,6 @@
         </div>
     </main>
 
->>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
 {% endblock %}
 {% block bas %}
     {% include "footer.html.twig" %}
