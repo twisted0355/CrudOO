@@ -151,11 +151,11 @@ class thestudentManager {
                 // on retire la virgule de fin
                 $sql = substr($sql, 0, -1);
 
-                // on exécute la ou les insertion(s)
+                // on exécute la ou les insertion(s)- lors du commit!
                 $this->db->exec($sql);
             }
 
-            // on envoie la les requêtes au serveur sql
+            // on envoie la ou les requête(s) au serveur sql, si il y a une erreur dans le commit (une des requêtes exécutée renvoie une erreur) on va directement au catch (la ligne return true n'est donc pas lue)
             $this->db->commit();
             // si pas de faute lors du commit, la ligne suivante est lue (renvoie true)
             return true;
