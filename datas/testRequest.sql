@@ -20,7 +20,14 @@ SELECT a.idthesection, a.thetitle, LEFT(a.thedesc,100) AS thedesc,
 			ON b.thestudent_idthestudent = c.idthestudent
     GROUP BY a.idthesection        
     ;      
-
-
+# récupérez tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
+SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' / ') AS thetitle
+              FROM thestudent
+                    LEFT JOIN thesection_has_thestudent
+                        ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
+                    LEFT JOIN thesection
+                        ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection
+                GROUP BY thestudent.idthestudent;
+        
 
   

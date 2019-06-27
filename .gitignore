@@ -2,3 +2,8 @@
 /vendor/
 # PHPStorm
 /.idea/
+# NetBeans
+/nbproject/
+
+# no cache
+/cache/
