@@ -24,6 +24,7 @@
                     {% for item in sections %}
                         <label>{{ item.thetitle }}</label> <input name='idthesection[]' type='checkbox' value='{{ item.idthesection }}'> |
                         {% else %}
+                            
                         {% endfor %}<br>
                     <input type="submit" value="Envoyer">
                 </form>

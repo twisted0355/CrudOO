@@ -13,8 +13,7 @@ class thestudentManager {
     }
 
     // on sélectionne les étudiants de la section actuelle grâce à son id
-    public function selectionnerStudentBySectionId(int $idsection): array
-    {
+    public function selectionnerStudentBySectionId(int $idsection): array {
 
         if ($idsection === 0)
             return [];
