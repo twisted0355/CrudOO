@@ -10,7 +10,6 @@
     if(isset($_GET['addstudent'])){
 
         $student = $thestudentM->afficherStudent();
-
             // Ajouter un stagiaire
             $count = $_GET['count'];
             echo $twig->render("admin/student/ajoutStudent.html.twig",array('student'=>$student, 'count'=> $count));
