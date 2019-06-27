@@ -190,8 +190,7 @@ class thestudentManager {
         $recup->bindValue(1, $idstudent, PDO::PARAM_INT);
         $recup->execute();
 
-        if ($recup->rowCount() === 0)
-            return [];
+        if ($recup->rowCount() === 0) return [];
 
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
