@@ -177,14 +177,14 @@ class thestudentManager {
 
         if ($idstudent === 0) return [];
 
-        $sql = "SELECT thestudent.*
+        $sql = "SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' / ') AS thetitle
 	FROM thestudent
         LEFT JOIN thesection_has_thestudent
             ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
         LEFT JOIN thesection
-            ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection
-        
-    WHERE  thestudent.idthestudent=?;";
+            ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection        
+    WHERE  thestudent.idthestudent=?
+    GROUP BY thestudent.idthestudent;";
 
         $recup = $this->db->prepare($sql);
         $recup->bindValue(1, $idstudent, PDO::PARAM_INT);
