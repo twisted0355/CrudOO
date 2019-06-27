@@ -12,20 +12,6 @@
 
         $student = $thestudentM->afficherStudent();
 
-<<<<<<< HEAD
-            // Ajouter un stagiaire
-            $count = $_GET['count'];
-            echo $twig->render("admin/student/ajoutStudent.html.twig",array('student'=>$student, 'count'=> $count));
-    }
-    elseif(isset($_GET['update']) && ctype_digit($_GET['update'])){
-        //modifier stagiaire
-    }
-    else{
-
-        /*
-         * Page d'accueil
-         */
-=======
 if (isset($_GET['addstudent'])) {
     
     /*
@@ -83,16 +69,9 @@ if (isset($_GET['addstudent'])) {
     echo $twig->render("admin/student/deleteAdminStudent.html.twig");
     
 } else {
->>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
 
     // récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
 
-<<<<<<< HEAD
-        $student = $thestudentM->afficherStudent();
-        echo $twig->render("admin/student/accueilAdminStudent.html.twig",array('student'=>$student));
-
-    }
-=======
 // récupérer tous les stagiaires avec les sections dans lesquelles ils sont, affichez les stagiaires qui n'ont pas de section également
     $recupStudents = $thestudentM->selectionnerAllStudent();
 
@@ -100,4 +79,4 @@ if (isset($_GET['addstudent'])) {
     // appel de la vue avec le passage des étudiants
     echo $twig->render("admin/student/accueilAdminStudent.html.twig", ["student" => $recupStudents]);
 }
->>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
+    }

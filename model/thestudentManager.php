@@ -16,14 +16,8 @@ class thestudentManager {
     public function selectionnerStudentBySectionId(int $idsection): array
     {
 
-<<<<<<< HEAD
-        if ($idsection === 0) {
-            return [];
-        }
-=======
         if ($idsection === 0)
             return [];
->>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
 
         $sql = "SELECT thestudent.*
 	FROM thestudent
@@ -35,14 +29,8 @@ class thestudentManager {
         $recup->bindValue(1, $idsection, PDO::PARAM_INT);
         $recup->execute();
 
-<<<<<<< HEAD
-        if ($recup->rowCount() === 0) {
-            return [];
-        }
-=======
         if ($recup->rowCount() === 0)
             return [];
->>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
 
         return $recup->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -184,54 +172,4 @@ class thestudentManager {
         }
     }
 
-<<<<<<< HEAD
-
-    // function afficher étudiants et leurs sections
-    public function afficherStudent()
-    {
-        $sql = "SELECT thename, thesurname, thetitle,GROUP_CONCAT(thetitle SEPARATOR ' / ') AS thetitle
-        FROM thestudent
-        LEFT JOIN thesection_has_thestudent
-        ON thesection_has_thestudent.thestudent_idthestudent = thestudent.idthestudent
-        LEFT JOIN thesection
-        ON thesection_has_thestudent.thesection_idthesection = thesection.idthesection
-        GROUP BY thestudent.idthestudent";
-
-        $recup = $this->db->query($sql);
-        if ($recup->rowCount() === 0) {
-            return [];
-        }
-        return $recup->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-    }
-
-    // Function ajouter un étudiant et la sections dans la base de données
-    public function ajouterStudent()
-    {
-        //j'insère le nom et le prénom de l'élève dans la base de donnée du nouvelles élève dans la database
-        $sql = "INSERT INTO thestudent(thename, thesurname),
-                VALUE(:thename, :theusername)";
-        $sql->execute(array(
-            'thename' => $_POST['thename'],
-            'thesurname' => $_POST['surname']
-        ));
-
-        //Je récupère l'id de l'atudiant ajouté
-        $idstudent = "SELECT theidstudent FROM thestudent WHERE thesurname";
-
-        // J'inscère l'ID de l'étudiant dans la section choisi
-        $sql = "INSERT INTO thesection_has_thestudent(thesection_idthesection, thestudent_idthestudent),
-                VALUE(:section, :idstudent)";
-        $sql->execute(array(
-            'section'=>$_POST['section'],
-            'idstudent'=> $idstudent
-        ));
-
-    }
-
-
-=======
->>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
 }
