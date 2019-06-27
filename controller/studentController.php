@@ -77,6 +77,11 @@ if (isset($_GET['addstudent'])) {
      * on veut supprimer un stagiaire
      */
     $idstagiaire = (int) $_GET['delete'];
+    
+    
+    // appel de la vue avec le passage des étudiants
+    echo $twig->render("admin/student/deleteAdminStudent.html.twig");
+    
 } else {
 >>>>>>> 28b640c595853ac45d62449270da5cfc90032fc4
 
