@@ -72,7 +72,11 @@ if (isset($_GET['addstudent'])) {
     // on a validé la suppression (existance de la variable get "ok")    
     }else{
         
+        // suppression (pas de retour avec void: deleteStudentById(int $id):void{...} )
+        $thestudentM->deleteStudentById($idstagiaire);
         
+        header("Location: ./?adminstudent");
+        exit();
         
     }
 } else {

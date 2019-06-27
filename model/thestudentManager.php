@@ -194,5 +194,16 @@ class thestudentManager {
 
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
+    
+    
+    /*
+     * méthode permettant de supprimer
+     */
 
+    public function deleteStudentById(int $id):void{
+        $sql="DELETE FROM thestudent WHERE idthestudent=?";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1,$id, PDO::PARAM_INT);
+        $req->execute();
+    }
 }
