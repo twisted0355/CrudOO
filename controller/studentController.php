@@ -65,10 +65,10 @@ if (isset($_GET['addstudent'])) {
     if (!isset($_GET['ok'])) {
 
         // on récupère l'étudiant grâce à son ID
-        
+        $recupStudent = $thestudentM->selectionnerStudentById($idstagiaire);
         
         // appel de la vue avec le passage d'un étudiant
-        echo $twig->render("admin/student/deleteAdminStudent.html.twig");
+        echo $twig->render("admin/student/deleteAdminStudent.html.twig",array("user"=>$recupStudent));
         
         
     // on a validé la suppression (existance de la variable get "ok")    

@@ -37,7 +37,7 @@ SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' / ') AS thetit
             ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
         LEFT JOIN thesection
             ON thesection_has_thestudent.thesection_idthesection= thesection.idthesection        
-    WHERE  thestudent.idthestudent=3
+    WHERE  thestudent.idthestudent=10
     GROUP BY thestudent.idthestudent;        
 
   

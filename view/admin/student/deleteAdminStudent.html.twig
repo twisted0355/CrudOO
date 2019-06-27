@@ -17,19 +17,12 @@
                 <p class="lead">Gestion des étudiants</p>
             </div>
             <div class="col-lg-6 text-left">
-                <h5 class='mb-4 text-center'>Voulez-vous vraiment supprimer le stagiaire:</h5>
-                {# Faites apparaître le stagiaire avec ses sections quand il en a #}
-                {# dump(student) #}
-                {% for item in student %}
-                    <h4>{{ item.thename }} {{ item.thesurname }}<small> <a href='?adminstudent&update={{ item.idthestudent }}'>Mettre à jour</a> | <a href='?adminstudent&delete={{ item.idthestudent }}'>Supprimer</a> </small></h4>
-                    {% if item.thetitle is empty %}
-                        <p>Cet élève n'est pas dans une section</p>
-                    {% else %}    
-                        <p>{{ item.thetitle }}</p>
-                    {% endif %}
-                {% else %}
-                    <h4 class='mt-3'>Pas encore d'étudiants</h4>
-                {% endfor %}
+                <h5 class='mb-4'>Voulez-vous vraiment supprimer le stagiaire :</h5>
+                <p>{{ user.thename }} {{ user.thesurname }}</p>
+                <h5>Présent dans les section(s): </h5>
+                <p>{{ user.thetitle }}</p>
+                <div><a type="button" href="?adminstudent&delete={{ user.idthestudent }}&ok" class="btn btn-primary">Supprimer</a> <a type="button" href="?adminstudent" class="btn btn-secondary">Annuler</a> </</div>
+                
             </div>
         </div>
     </main>
