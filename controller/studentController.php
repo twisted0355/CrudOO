@@ -71,7 +71,12 @@ if (isset($_GET['addstudent'])) {
     // si le formulaire est envoyé    
     }else{
         
+        // var_dump($_POST);
         
+        // instanciation de thestudent avec la variable POST (pour utiliser les setters de vérification de données)
+        $updateStudent = new thestudent($_POST);
+        
+        var_dump($updateStudent);
         
     }
     
