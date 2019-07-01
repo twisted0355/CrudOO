@@ -49,7 +49,11 @@ if (isset($_GET['addstudent'])) {
         }
     }
 } elseif (isset($_GET['update']) && ctype_digit($_GET['update'])) {
+    
+    
     $idstagiaire = (int) $_GET['update'];
+    
+    
     /*
      * on veut modifier un stagiaire
      */
@@ -76,7 +80,15 @@ if (isset($_GET['addstudent'])) {
         // instanciation de thestudent avec la variable POST (pour utiliser les setters de vérification de données)
         $updateStudent = new thestudent($_POST);
         
-        var_dump($updateStudent);
+        // var_dump($updateStudent);
+        
+        // si on a coché (ou laissé coché) au moins une section, on remplit $section grâce à une condition ternaire
+        $sections = (isset($_POST['idthesection']))? $_POST['idthesection']: [];
+        
+        // on appel la fonction qui effectue l'update d'un student (et qui supprime/ ajoute les sections pour cet étudiant) => argument (thestudent, array, int)
+        
+        $update = $thestudentM->updateStudentByIdWithSections($updateStudent,$sections,$idstagiaire);
+        
         
     }
     

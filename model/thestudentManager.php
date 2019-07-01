@@ -206,4 +206,25 @@ class thestudentManager {
         $req->bindValue(1,$id, PDO::PARAM_INT);
         $req->execute();
     }
+    
+    /*
+     * méthode permettant de modifier un étudiant et de changer les sections dans lesquelles il se trouve
+     */
+
+    public function updateStudentByIdWithSections(
+            thestudent $student, 
+            array $sections, 
+            int $getidstudent)
+            : bool{
+        
+        try{
+            
+        } catch (Exception $ex) {
+
+        }
+        
+        
+    }
+    
+    
 }
