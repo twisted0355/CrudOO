@@ -219,8 +219,19 @@ class thestudentManager {
         
         try{
             
-        } catch (Exception $ex) {
-
+            $this->db->beginTransaction();
+            
+            
+            $this->db->commit();
+            
+            return true;
+            
+        } catch (PDOException $ex) {
+            
+            $this->db->rollBack();
+            
+            return false;
+            
         }
         
         
