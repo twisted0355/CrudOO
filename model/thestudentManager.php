@@ -239,6 +239,36 @@ class thestudentManager {
             
             $prepare->execute();
             
+            // Comme on ne sait pas à l'avance dans quelles sections se trouvait le stagiaire avant l'envoie du formulaire, on va tout simplement supprimer toutes les liens entre ce stagiaire et les sections, pour les réinsérés si nécessaire par la suite
+            
+            // suppression de toutes les entrées liées au stagiaire
+            $this->db->exec("DELETE FROM thesection_has_thestudent WHERE thestudent_idthestudent=$getidstudent;");
+            
+            
+            // si on a au moins une section à insérer
+            if(!empty($sections)){
+                
+                $sql = "INSERT INTO thesection_has_thestudent (thestudent_idthestudent, thesection_idthesection) VALUES ";
+                
+                // tant que l'on a des sections
+                foreach($sections AS $values){
+                    // on doit protéger la valeur contre les injections sql, en cas de non numérique (int) nous donne 0
+                    $idsection = (int) $values;
+                    // pour éviter l'erreur sql, si $id ne vaut pas 0 (pas d'erreurs de conversion)
+                    if($idsection!==0){
+                        $sql .= "($getidstudent,$idsection),";
+                    }
+                }
+                
+                // on supprime la dernière virgule de l'insert
+                
+                $sql = substr($sql, 0, -1);
+                
+                $this->db->exec($sql);
+                
+            }
+            
+            
             
             
             $this->db->commit();
