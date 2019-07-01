@@ -217,9 +217,28 @@ class thestudentManager {
             int $getidstudent)
             : bool{
         
+        
+        // si l'id de l'url ne correspond pas à l'id de l'objet (vient d'un POST) on arrête la méthode
+        
+        if($getidstudent != $student->getIdthestudent()) return false;
+        
+        // si un champs n'est pas valide (vide) on arrête la méthode
+        if(empty($student->getThename())||empty($student->getThesurname())) return false;
+        
         try{
             
             $this->db->beginTransaction();
+            
+            $sql ="UPDATE thestudent SET thename=?,thesurname=? WHERE idthestudent=?;";
+            
+            $prepare = $this->db->prepare($sql);
+            
+            $prepare->bindValue(1, $student->getThename(),PDO::PARAM_STR);
+            $prepare->bindValue(2, $student->getThesurname(),PDO::PARAM_STR);
+            $prepare->bindValue(3, $student->getIdthestudent(),PDO::PARAM_INT);
+            
+            $prepare->execute();
+            
             
             
             $this->db->commit();
@@ -227,6 +246,8 @@ class thestudentManager {
             return true;
             
         } catch (PDOException $ex) {
+            
+            echo $ex->getMessage();
             
             $this->db->rollBack();
             
