@@ -1,0 +1,52 @@
+{# on étend le template depuis base.html.twig, qui est donc son parent #}
+{% extends "template1.html.twig" %}
+
+{# on veut surcharger le title, on utilise le bloc, on récupère le contenu du parent {{ parent() }} et on rajoute notre texte #}
+{% block title %}{{ parent() }} | Admin | Modifier un stagiaire{% endblock %}
+
+{% block menuhaut %}
+{% include "admin/menuHautAdmin.html.twig" %}
+{% endblock %}
+
+{% block milieu %}
+    <!-- Page Content -->
+<main role="main" class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mt-5">Administration du CF2m</h1>
+                <p class="lead">Admin | Modifier un stagiaire</p>
+            </div>
+            <div class="col-lg-6 text-left">
+                {# Affichage du formulaire #}
+                <form action="" method="post" name="createSection">
+                    <input name="idthestudent" type="hidden" value="{{ student.idthestudent }}">
+                    <input name="thename" type="text" placeholder="Le nom" value="{{ student.thename }}" required><br>
+                    <textarea name="thesurname" placeholder="Le prénom" required>{{ student.thesurname }}</textarea><br>
+                    {# création d'un tableau contenant tous les id des sections dans lesquelles se trouvent le student #}
+                    {% set tableau = student.idthesection|split(',') %}
+                    {% for item in sections %}
+                        {# si l'id de la section est attribuée à l'étudiant (équivalence de in_array en php) #}
+                        {% if item.idthesection in tableau %}
+                            {# on crée une variable pour cocher#}
+                            {% set check = "checked" %}
+                            {% else %}
+                                {# on crée une variable vide #}
+                                {% set check = "" %}
+                            {% endif %}
+                        {# application du checked si nécessaire #}    
+                        <label>{{ item.thetitle }}</label> <input name='idthesection[]' type='checkbox' value='{{ item.idthesection }}' {{ check }}> |
+                        {% else %}
+                            <label>Pas encore de sections</label>
+                        {% endfor %}<br>
+                    <input type="submit" value="Envoyer">
+                </form>
+                <h3>{{ error }}</h3>
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block bas %}
+{% include "footer.html.twig" %}
+{% endblock %}

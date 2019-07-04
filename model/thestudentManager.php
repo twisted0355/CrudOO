@@ -177,7 +177,7 @@ class thestudentManager {
 
         if ($idstudent === 0) return [];
 
-        $sql = "SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR ' / ') AS thetitle
+        $sql = "SELECT thestudent.*, GROUP_CONCAT(thesection.thetitle SEPARATOR '|||') AS thetitle, GROUP_CONCAT(thesection.idthesection) AS idthesection
 	FROM thestudent
         LEFT JOIN thesection_has_thestudent
             ON thesection_has_thestudent.thestudent_idthestudent= thestudent.idthestudent
@@ -194,5 +194,99 @@ class thestudentManager {
 
         return $recup->fetch(PDO::FETCH_ASSOC);
     }
+    
+    
+    /*
+     * méthode permettant de supprimer
+     */
 
+    public function deleteStudentById(int $id):void{
+        $sql="DELETE FROM thestudent WHERE idthestudent=?";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1,$id, PDO::PARAM_INT);
+        $req->execute();
+    }
+    
+    /*
+     * méthode permettant de modifier un étudiant et de changer les sections dans lesquelles il se trouve
+     */
+
+    public function updateStudentByIdWithSections(
+            thestudent $student, 
+            array $sections, 
+            int $getidstudent)
+            : bool{
+        
+        
+        // si l'id de l'url ne correspond pas à l'id de l'objet (vient d'un POST) on arrête la méthode
+        
+        if($getidstudent != $student->getIdthestudent()) return false;
+        
+        // si un champs n'est pas valide (vide) on arrête la méthode
+        if(empty($student->getThename())||empty($student->getThesurname())) return false;
+        
+        try{
+            
+            $this->db->beginTransaction();
+            
+            $sql ="UPDATE thestudent SET thename=?,thesurname=? WHERE idthestudent=?;";
+            
+            $prepare = $this->db->prepare($sql);
+            
+            $prepare->bindValue(1, $student->getThename(),PDO::PARAM_STR);
+            $prepare->bindValue(2, $student->getThesurname(),PDO::PARAM_STR);
+            $prepare->bindValue(3, $student->getIdthestudent(),PDO::PARAM_INT);
+            
+            $prepare->execute();
+            
+            // Comme on ne sait pas à l'avance dans quelles sections se trouvait le stagiaire avant l'envoie du formulaire, on va tout simplement supprimer toutes les liens entre ce stagiaire et les sections, pour les réinsérés si nécessaire par la suite
+            
+            // suppression de toutes les entrées liées au stagiaire
+            $this->db->exec("DELETE FROM thesection_has_thestudent WHERE thestudent_idthestudent=$getidstudent;");
+            
+            
+            // si on a au moins une section à insérer
+            if(!empty($sections)){
+                
+                $sql = "INSERT INTO thesection_has_thestudent (thestudent_idthestudent, thesection_idthesection) VALUES ";
+                
+                // tant que l'on a des sections
+                foreach($sections AS $values){
+                    // on doit protéger la valeur contre les injections sql, en cas de non numérique (int) nous donne 0
+                    $idsection = (int) $values;
+                    // pour éviter l'erreur sql, si $id ne vaut pas 0 (pas d'erreurs de conversion)
+                    if($idsection!==0){
+                        $sql .= "($getidstudent,$idsection),";
+                    }
+                }
+                
+                // on supprime la dernière virgule de l'insert
+                
+                $sql = substr($sql, 0, -1);
+                
+                $this->db->exec($sql);
+                
+            }
+            
+            
+            
+            
+            $this->db->commit();
+            
+            return true;
+            
+        } catch (PDOException $ex) {
+            
+            echo $ex->getMessage();
+            
+            $this->db->rollBack();
+            
+            return false;
+            
+        }
+        
+        
+    }
+    
+    
 }

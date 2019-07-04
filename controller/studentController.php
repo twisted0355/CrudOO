@@ -49,10 +49,52 @@ if (isset($_GET['addstudent'])) {
         }
     }
 } elseif (isset($_GET['update']) && ctype_digit($_GET['update'])) {
+    
+    
     $idstagiaire = (int) $_GET['update'];
+    
+    
     /*
      * on veut modifier un stagiaire
      */
+    
+    // affichage du formulaire
+    if(empty($_POST)){
+        
+        // on récupère l'étudiant grâce à son ID
+        // Et l'id des sections pour cocher les sections dans lesquelles l'étudiant se trouve avant l'update
+        $recupStudent = $thestudentM->selectionnerStudentById($idstagiaire);
+        
+        // on utilise la méthode qui prend titre et id de toutes les sections 
+        // pour afficher toutes les sections possibles pour l'update du stagiaire
+        $recupSections = $thesectionM->creerMenu();
+        
+        // appel de la vue
+        echo $twig->render("admin/student/updateAdminStudent.html.twig",["sections"=>$recupSections,"student"=>$recupStudent]);
+    
+    // si le formulaire est envoyé    
+    }else{
+        
+        // var_dump($_POST);
+        
+        // instanciation de thestudent avec la variable POST (pour utiliser les setters de vérification de données)
+        $updateStudent = new thestudent($_POST);
+        
+        // var_dump($updateStudent);
+        
+        // si on a coché (ou laissé coché) au moins une section, on remplit $section grâce à une condition ternaire
+        $sections = (isset($_POST['idthesection']))? $_POST['idthesection']: [];
+        
+        // on appel la fonction qui effectue l'update d'un student (et qui supprime/ ajoute les sections pour cet étudiant) => argument (thestudent, array, int)
+        
+        $update = $thestudentM->updateStudentByIdWithSections($updateStudent,$sections,$idstagiaire);
+        
+        
+    }
+    
+       
+    
+    
 } elseif (isset($_GET['delete']) && ctype_digit($_GET['delete'])) {
     /*
      * on veut supprimer un stagiaire
@@ -72,7 +114,11 @@ if (isset($_GET['addstudent'])) {
     // on a validé la suppression (existance de la variable get "ok")    
     }else{
         
+        // suppression (pas de retour avec void: deleteStudentById(int $id):void{...} )
+        $thestudentM->deleteStudentById($idstagiaire);
         
+        header("Location: ./?adminstudent");
+        exit();
         
     }
 } else {
